@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyRank Widget Test Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .origin-info {
+            background: #e0f2fe;
+            border: 1px solid #b3e5fc;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+        }
+        
+        .origin-info h3 {
+            color: #0277bd;
+            margin-bottom: 0.5rem;
+        }
+        
+        .origin-info code {
+            background: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #ddd;
+        }
+        
+        .test-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .test-section h2 {
+            color: #333;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+        
+        .test-section h3 {
+            color: #555;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .widget-container {
+            border: 2px dashed #ddd;
+            padding: 2rem;
+            border-radius: 8px;
+            background: #fafbfc;
+            margin: 1rem 0;
+            min-height: 100px;
+            position: relative;
+        }
+        
+        .widget-container::before {
+            content: "Widget will appear below this line";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 12px;
+            color: #999;
+            font-style: italic;
+        }
+        
+        .instructions {
+            background: #f0f9ff;
+            border: 1px solid #bfdbfe;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+        }
+        
+        .instructions h3 {
+            color: #1d4ed8;
+            margin-bottom: 1rem;
+        }
+        
+        .instructions ol {
+            margin-left: 1.5rem;
+        }
+        
+        .instructions li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .instructions code {
+            background: #e5e7eb;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .status {
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+        
+        .status.loading {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+        }
+        
+        .status.success {
+            background: #dcfce7;
+            border: 1px solid #22c55e;
+            color: #166534;
+        }
+        
+        .status.error {
+            background: #fef2f2;
+            border: 1px solid #ef4444;
+            color: #dc2626;
+        }
+        
+        .demo-content {
+            background: #f8fafc;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+        
+        .demo-content h2 {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+        
+        .demo-content p {
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+        
+        .footer {
+            text-align: center;
+            color: #666;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .widget-id-display {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            word-break: break-all;
+            margin: 1rem 0;
+        }
+        
+        .test-controls {
+            margin: 1rem 0;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .test-controls button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .test-controls button:hover {
+            background: #f9fafb;
+        }
+        
+        .test-controls button.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🚀 FlyRank Widget Platform</h1>
+            <p>Cross-Origin Widget Embedding Test Page</p>
+        </div>
+
+        <!-- Origin Information -->
+        <div class="origin-info">
+            <h3>🌐 Cross-Origin Test Setup</h3>
+            <p><strong>Test Page Origin:</strong> <code id="test-origin">http://localhost:5500</code></p>
+            <p><strong>API Server Origin:</strong> <code>http://localhost:8000</code></p>
+            <p>This demonstrates cross-origin widget embedding and CORS functionality.</p>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <h3>📋 Test Instructions</h3>
+            <ol>
+                <li>Make sure the FlyRank API server is running on <code>http://localhost:8000</code></li>
+                <li>Run this test page on <code>http://localhost:5500</code> using: <code>python -m http.server 5500</code></li>
+                <li>The widget should load automatically from the different origin</li>
+                <li>Try submitting the form to test cross-origin POST requests</li>
+                <li>Check browser developer tools for CORS headers and network requests</li>
+            </ol>
+        </div>
+
+        <!-- Widget Test Section -->
+        <div class="test-section">
+            <h2>📝 Widget Embedding Test</h2>
+            
+            <div class="test-controls">
+                <button onclick="loadSampleWidget()" class="active">Load Sample Widget</button>
+                <button onclick="loadCustomWidget()">Load Custom Widget ID</button>
+                <button onclick="clearWidget()">Clear Widget</button>
+            </div>
+
+            <div id="widget-status" class="status loading">
+                <strong>Status:</strong> Waiting for widget to load...
+            </div>
+
+            <div class="widget-id-display">
+                <strong>Current Widget ID:</strong> <span id="current-widget-id">None</span>
+            </div>
+
+            <!-- Widget Container -->
+            <div class="widget-container" id="widget-container">
+                <!-- Widget will be inserted here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Demo Content -->
+        <div class="demo-content">
+            <h2>Welcome to Our Website</h2>
+            <p>This is a demonstration of how the FlyRank widget would appear on a real customer website. The widget above is loaded from a different origin (localhost:8000) while this page runs on localhost:5500.</p>
+            
+            <p>This setup tests:</p>
+            <ul>
+                <li>✅ Cross-origin script loading</li>
+                <li>✅ CORS configuration for API calls</li>
+                <li>✅ Widget configuration loading</li>
+                <li>✅ Form submission across origins</li>
+                <li>✅ Error handling and user feedback</li>
+            </ul>
+        </div>
+
+        <!-- Network Test Section -->
+        <div class="test-section">
+            <h2>🔧 Network Test Tools</h2>
+            <p>Use these tools to test different scenarios:</p>
+            
+            <div class="test-controls">
+                <button onclick="testDirectAPI()">Test Direct API Call</button>
+                <button onclick="testCORSPreflight()">Test CORS Preflight</button>
+                <button onclick="testWidgetConfig()">Test Widget Config</button>
+                <button onclick="testSpamSubmission()">Test Spam Detection</button>
+                <button onclick="testRateLimit()">Test Rate Limiting</button>
+            </div>
+            
+            <div id="test-results" style="margin-top: 1rem;"></div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>FlyRank Widget Platform - Cross-Origin Test Page</p>
+            <p>Check browser developer tools for detailed network activity and CORS headers</p>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_BASE = 'http://localhost:8000';
+        const DEFAULT_WIDGET_ID = 'sample-widget-id'; // This will be replaced with actual widget ID from seed data
+        
+        // Update origin display
+        document.getElementById('test-origin').textContent = window.location.origin;
+        
+        // Status management
+        function setStatus(message, type = 'loading') {
+            const statusEl = document.getElementById('widget-status');
+            statusEl.className = `status ${type}`;
+            statusEl.innerHTML = `<strong>Status:</strong> ${message}`;
+        }
+        
+        function setCurrentWidgetId(widgetId) {
+            document.getElementById('current-widget-id').textContent = widgetId || 'None';
+        }
+        
+        // Widget loading functions
+        function loadSampleWidget() {
+            // In a real scenario, this would be a widget ID from the seed data
+            // For now, we'll use a placeholder and show instructions
+            setStatus('Loading sample widget from seed data...', 'loading');
+            
+            // Clear existing widget
+            clearWidget();
+            
+            // Add instructional message
+            const container = document.getElementById('widget-container');
+            container.innerHTML = `
+                <div style="padding: 2rem; text-align: center; color: #666;">
+                    <h3>Sample Widget Loading</h3>
+                    <p>To test with real data:</p>
+                    <ol style="text-align: left; display: inline-block; margin: 1rem 0;">
+                        <li>Start the API server: <code>python main.py</code></li>
+                        <li>Run the seed script: <code>python seed.py</code></li>
+                        <li>Copy a widget ID from the seed output</li>
+                        <li>Use "Load Custom Widget ID" button above</li>
+                    </ol>
+                    <p>Or manually embed using:</p>
+                    <code>&lt;script src="${API_BASE}/static/widget.v1.js?id=YOUR_WIDGET_ID"&gt;&lt;/script&gt;</code>
+                </div>
+            `;
+            
+            setStatus('Ready for custom widget ID or manual embedding', 'success');
+        }
+        
+        function loadCustomWidget() {
+            const widgetId = prompt('Enter Widget ID:');
+            if (!widgetId) return;
+            
+            clearWidget();
+            setStatus(`Loading widget ${widgetId}...`, 'loading');
+            setCurrentWidgetId(widgetId);
+            
+            // Create script tag to load widget
+            const script = document.createElement('script');
+            script.src = `${API_BASE}/static/widget.v1.js?id=${widgetId}`;
+            script.onload = () => {
+                setStatus(`Widget ${widgetId} loaded successfully!`, 'success');
+            };
+            script.onerror = () => {
+                setStatus(`Failed to load widget ${widgetId}`, 'error');
+            };
+            
+            // Append script to container so widget renders there
+            const container = document.getElementById('widget-container');
+            container.appendChild(script);
+        }
+        
+        function clearWidget() {
+            const container = document.getElementById('widget-container');
+            container.innerHTML = '';
+            setCurrentWidgetId(null);
+        }
+        
+        // Network test functions
+        async function testDirectAPI() {
+            showTestResult('Testing direct API connection...', 'loading');
+            
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showTestResult(`✅ API connection successful: ${JSON.stringify(data)}`, 'success');
+                } else {
+                    showTestResult(`❌ API error: ${response.status} ${response.statusText}`, 'error');
+                }
+            } catch (error) {
+                showTestResult(`❌ Connection failed: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testCORSPreflight() {
+            showTestResult('Testing CORS preflight...', 'loading');
+            
+            try {
+                const response = await fetch(`${API_BASE}/submissions`, {
+                    method: 'OPTIONS',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const corsHeaders = {
+                    'Access-Control-Allow-Origin': response.headers.get('Access-Control-Allow-Origin'),
+                    'Access-Control-Allow-Methods': response.headers.get('Access-Control-Allow-Methods'),
+                    'Access-Control-Allow-Headers': response.headers.get('Access-Control-Allow-Headers')
+                };
+                
+                showTestResult(`✅ CORS preflight successful: ${JSON.stringify(corsHeaders, null, 2)}`, 'success');
+            } catch (error) {
+                showTestResult(`❌ CORS preflight failed: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testWidgetConfig() {
+            const widgetId = prompt('Enter Widget ID to test config loading:');
+            if (!widgetId) return;
+            
+            showTestResult(`Testing widget config for ${widgetId}...`, 'loading');
+            
+            try {
+                const response = await fetch(`${API_BASE}/widgets/${widgetId}/config`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showTestResult(`✅ Widget config loaded: ${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    showTestResult(`❌ Widget config error: ${JSON.stringify(data)}`, 'error');
+                }
+            } catch (error) {
+                showTestResult(`❌ Widget config failed: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testSpamSubmission() {
+            showTestResult('Testing spam detection (honeypot)...', 'loading');
+            
+            try {
+                const response = await fetch(`${API_BASE}/submissions`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        widget_id: 'test-widget',
+                        data: {
+                            email: 'spam@test.com'
+                        },
+                        hp_field: 'spam-bot-filled-this'  // This should trigger spam detection
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showTestResult(`✅ Spam submission handled (should be dropped): ${JSON.stringify(data)}`, 'success');
+                } else {
+                    showTestResult(`❌ Spam test error: ${JSON.stringify(data)}`, 'error');
+                }
+            } catch (error) {
+                showTestResult(`❌ Spam test failed: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testRateLimit() {
+            showTestResult('Testing rate limiting (sending multiple requests)...', 'loading');
+            
+            const promises = [];
+            for (let i = 0; i < 15; i++) {  // Send more requests than the limit
+                promises.push(
+                    fetch(`${API_BASE}/submissions`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            widget_id: 'test-widget',
+                            data: {
+                                email: `test${i}@example.com`
+                            },
+                            hp_field: ''
+                        })
+                    })
+                );
+            }
+            
+            try {
+                const responses = await Promise.all(promises);
+                const statusCounts = {};
+                
+                responses.forEach(response => {
+                    const status = response.status;
+                    statusCounts[status] = (statusCounts[status] || 0) + 1;
+                });
+                
+                showTestResult(`✅ Rate limit test results: ${JSON.stringify(statusCounts, null, 2)}`, 'success');
+            } catch (error) {
+                showTestResult(`❌ Rate limit test failed: ${error.message}`, 'error');
+            }
+        }
+        
+        function showTestResult(message, type) {
+            const resultsEl = document.getElementById('test-results');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            resultsEl.innerHTML = `
+                <div class="status ${type}">
+                    <strong>[${timestamp}]</strong> ${message}
+                </div>
+            ` + resultsEl.innerHTML;
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setStatus('Test page loaded. Click "Load Sample Widget" to begin.', 'success');
+            
+            // Test API connectivity on load
+            testDirectAPI();
+        });
+        
+        // Monitor for widget loading
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes.length > 0) {
+                    const container = document.getElementById('widget-container');
+                    if (container && container.querySelector('.flyrank-widget')) {
+                        setStatus('Widget rendered successfully! Try submitting the form.', 'success');
+                    }
+                }
+            });
+        });
+        
+        observer.observe(document.body, { childList: true, subtree: true });
+    </script>
+</body>
+</html>
