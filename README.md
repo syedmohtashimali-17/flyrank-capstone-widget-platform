@@ -1,1 +1,0 @@
-# flyrank-capstone-widget-platform
