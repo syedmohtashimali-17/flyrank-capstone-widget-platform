@@ -1,4 +1,0 @@
-run: "python main.py"
-seed: "python seed.py"
-test: "pytest -q"
-base_url: "http://localhost:8000"
