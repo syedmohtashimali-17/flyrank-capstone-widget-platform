@@ -1,0 +1,3 @@
+run: "python main.py"
+seed: "python seed.py"
+base_url: "http://localhost:8000"
